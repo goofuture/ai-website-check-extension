@@ -1,5 +1,5 @@
 /*
- * popup.js — AI 网站检测扩展的交互逻辑。
+ * popup.js — 网站GEO检测评分扩展的交互逻辑。
  *
  * 两条检测路径，均复用 engine.js 的本地评分引擎：
  *   1) 检测当前页面：通过 chrome.scripting.executeScript 注入 extractPage（见 extract.js），
@@ -330,7 +330,7 @@
     if (!lastResult) return;
     var r = lastResult;
     var lines = [];
-    lines.push("【" + r.domain + " · AI 网站检测】综合 " + r.score + "/100（" + Engine.level_word(r.score) + "）");
+    lines.push("【" + r.domain + " · 网站GEO检测评分】综合 " + r.score + "/100（" + Engine.level_word(r.score) + "）");
     lines.push("AI 引用基建：llms.txt " + (r.extra.llms ? "有" : "无") + " / robots.txt " + (r.extra.robots ? "有" : "无")
       + " / sitemap.xml " + (r.extra.sitemap ? "有" : "无") + " / JSON-LD " + (r.extra.jsonld ? "有" : "无"));
     lines.push("薄弱维度：" + r.advice.map(function (a) { return a.name + "（" + Math.round(a.score) + "）"; }).join("、"));

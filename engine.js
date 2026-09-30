@@ -483,7 +483,7 @@
       + "<div class='chips'>" + chips.join("") + "</div></div></div>"
       + "<div class='sec'><h2>分项检测结果</h2>" + dim_rows + "</div>"
       + advice_html + ai_html
-      + "<p class='note'>本报告由 GooFuture 开源 AI 网站检测工具生成（B-SiteAgent AI）。检测结果由程序化分析与 AI 参考综合生成，仅供参考。</p>"
+      + "<p class='note'>本报告由 GooFuture 开源 网站GEO检测评分工具生成（B-SiteAgent AI）。检测结果由程序化分析与 AI 参考综合生成，仅供参考。</p>"
       + "</div></body></html>";
   }
 
@@ -529,7 +529,7 @@
     }
     if (ai) { L.push("## AI 深度解读"); L.push(""); L.push(ai); L.push(""); }
     L.push("---");
-    L.push("本报告由 GooFuture 开源 AI 网站检测工具生成（B-SiteAgent AI），仅供参考。");
+    L.push("本报告由 GooFuture 开源 网站GEO检测评分工具生成（B-SiteAgent AI），仅供参考。");
     return L.join("\n");
   }
 

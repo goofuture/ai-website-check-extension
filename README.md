@@ -1,4 +1,4 @@
-# AI 网站检测 · Chrome 浏览器插件（GooFuture · B-SiteAgent AI）
+# 网站GEO检测评分 · Chrome 浏览器插件（GooFuture · B-SiteAgent AI）
 
 一键检测**任意企业官网**的「AI 可读性」——也就是这家网站被 **AI 搜索 / AI 问答 / AI 智能体**
 读懂、引用、调用的能力。插件在你本地完成 10 维评分、薄弱项优化建议、报告与 SKILL 生成，
