@@ -43,12 +43,6 @@
 
 ## 安装
 
-**Chrome / Edge（开发者模式加载）**
-
-1. 打开 `chrome://extensions`（Edge 为 `edge://extensions`）→ 右上角开启「开发者模式」。
-2. 点击「加载已解压的扩展程序」，选择本仓库目录（含 `manifest.json` 的目录）。
-3. 固定插件到工具栏，打开任意企业官网，点击图标即可检测。
-
 **Firefox**
 
 1. 打开 `about:debugging#/runtime/this-firefox` → 点「临时加载附加组件…」。
