@@ -1,4 +1,4 @@
-# 网站GEO检测评分 · Chrome 浏览器插件（GooFuture · B-SiteAgent AI）
+# 网站GEO检测评分 · 浏览器插件（Chrome / Edge 通用，GooFuture · B-SiteAgent AI）
 
 一键检测**任意企业官网**的「AI 可读性」——也就是这家网站被 **AI 搜索 / AI 问答 / AI 智能体**
 读懂、引用、调用的能力。插件在你本地完成 10 维评分、薄弱项优化建议、报告与 SKILL 生成，
@@ -7,8 +7,12 @@
 > 本插件的评分逻辑是 GooFuture 线上 PHP 检测（`detect.php`）与开源 Python 版（`ai-website-check-skill`）
 > 的**权威移植**，本地分数与官网收录分数口径一致。
 
+> **Microsoft Edge 用户**：本扩展基于 Chromium 内核的 Manifest V3 开发，与 Chrome 共用同一套 API（`chrome.*`），
+> **同一份代码无需任何修改即可在 Edge 上运行**（详见下方「Microsoft Edge 适配说明」）。
+
 ## 插件效果
-![](images/goofuture-usage.png)  
+
+> 截图待补充：加载扩展后打开任意企业官网，点击工具栏图标即可检测。
 
 ## 它能做什么
 
@@ -36,7 +40,39 @@
 2. 点击「加载已解压的扩展程序」，选择本仓库目录（含 `manifest.json` 的目录）。
 3. 固定插件到工具栏，打开任意企业官网，点击图标即可检测。
 
-> 发布到 Chrome 应用商店前，请替换 `icons/` 下的图标（当前为程序生成的占位图标）。
+> 发布到应用商店（Chrome Web Store / Microsoft Edge Add-ons）前，请替换 `icons/` 下的图标（当前为程序生成的占位图标）。
+
+## Microsoft Edge 适配说明
+
+本扩展基于 Chromium 内核的 **Manifest V3** 开发，与 Chrome 共用同一套扩展 API（`chrome.*`）。
+**代码无需任何修改即可在 Microsoft Edge 上运行**——本分支（`edge`）仅补充 Edge 专属的
+安装与上架说明，源码与 `main` 分支（Chrome 版）保持一致，可同时提交两个商店。
+
+### 本地加载（开发者模式）
+1. 打开 Edge → 地址栏输入 `edge://extensions` → 左下角开启「开发人员模式」。
+2. 点击「加载解压缩的扩展」，选择本仓库目录（含 `manifest.json` 的目录）。
+3. 点击工具栏的扩展图标（拼图按钮）将其固定，打开任意企业官网即可检测。
+
+### 发布到 Microsoft Edge Add-ons（微软应用商店）
+1. 注册 [Microsoft Partner Center](https://partner.microsoft.com/) 开发者账号（一次性注册费，约 19 美元 / 99 元）。
+2. 进入 **Edge Add-ons 开发人员仪表板** → 新建扩展 → 上传本仓库打包后的 **.zip**（不要包含 `.git`）。
+3. 填写商店信息：名称、简介、分类（建议选「生产力 / 开发者工具」）、语言、128px 图标。
+4. **隐私政策（必填）**：Edge 强制要求提供隐私政策链接。可复用 GooFuture 官网隐私政策页，
+   内容需明确：「评分 / 报告 / SKILL 均在浏览器本地完成，仅在用户主动点击『提交收录』或『AI 深度诊断』时才对外请求」。
+5. **权限用途说明（重点）**：`optional_host_permissions: <all_urls>` 需在审核问卷中说明用途——
+   「用于读取用户指定的域名首页及其 `llms.txt` / `robots.txt` / `sitemap.xml`，以完成本地评分」。
+   Edge 对宽泛主机权限审核比 Chrome 更严，**保留为 `optional`（按需申请）可显著降低被拒风险**；切勿改成强制 `host_permissions`。
+6. 上传 1–2 张功能截图与宣传图，提交审核（通常 1–3 个工作日）。
+
+> 打包命令（仓库根目录执行，排除 `.git`）：
+> ```bash
+> zip -r ai-website-check-extension.zip . -x '*.git*'
+> ```
+
+### 与 Chrome 版的差异
+- 代码完全一致，同一个 `manifest.json` 可同时提交 Chrome Web Store 与 Microsoft Edge Add-ons。
+- 仅**商店上架流程与审核要求**不同（见上），无需维护两套源码。
+- Edge 不建议在本清单里写 `update_url`（那是 Chrome Web Store 专用），当前清单未包含，符合规范。
 
 ## 权限说明
 
