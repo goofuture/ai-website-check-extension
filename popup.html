@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="popup.css">
+  <title>AI 网站检测 · GooFuture</title>
+</head>
+<body>
+  <header class="hd">
+    <div class="brand">
+      <span class="logo">AI</span>
+      <div>
+        <div class="t1">AI 网站检测</div>
+        <div class="t2">GooFuture · B-SiteAgent</div>
+      </div>
+    </div>
+    <button id="btnSettings" class="icon-btn" title="设置">⚙</button>
+  </header>
+
+  <!-- 当前页面 -->
+  <section class="card" id="cardPage">
+    <div class="page-row">
+      <img id="pageFav" class="fav" alt="" />
+      <div class="page-meta">
+        <div class="page-title" id="pageTitle">—</div>
+        <div class="page-domain" id="pageDomain">—</div>
+      </div>
+    </div>
+    <button id="btnDetectPage" class="btn btn-primary btn-block">检测当前页面</button>
+    <div class="muted" id="pageHint"></div>
+  </section>
+
+  <!-- 指定域名 -->
+  <section class="card">
+    <div class="sec-label">或检测指定域名</div>
+    <div class="input-row">
+      <input id="domainInput" type="text" placeholder="example.com" spellcheck="false" />
+      <button id="btnDetectDomain" class="btn btn-primary">检测</button>
+    </div>
+    <div class="muted">提示：检测指定域名需要授予「访问所有网站」权限（仅用于读取该站首页与 llms/robots/sitemap）。</div>
+  </section>
+
+  <div id="status" class="status" hidden></div>
+
+  <!-- 结果 -->
+  <section class="card result" id="result" hidden>
+    <div class="head">
+      <div class="ring" id="ring"><b id="scoreNum">0</b><small>/100</small></div>
+      <div class="info">
+        <h1 id="rDomain">—</h1>
+        <p class="sub">官网 AI 健康度 · 评级：<span id="rLevel">—</span></p>
+        <div class="chips" id="rChips"></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-label">分项检测结果（10 维）</div>
+      <div id="rDims"></div>
+    </div>
+
+    <div class="sec" id="rAdviceWrap">
+      <div class="sec-label">优先优化建议</div>
+      <div id="rAdvice"></div>
+    </div>
+
+    <div class="sec ai-sec" id="aiSec" hidden>
+      <div class="sec-label">AI 深度解读</div>
+      <div class="ai-box" id="aiBox"></div>
+    </div>
+
+    <div class="sec submit-sec" id="submitSec" hidden>
+      <div class="sec-label">提交收录结果</div>
+      <div id="submitInfo" class="muted"></div>
+    </div>
+
+    <div class="actions">
+      <button id="btnAI" class="btn btn-ghost">AI 深度诊断</button>
+      <button id="btnSubmit" class="btn btn-ghost">提交收录</button>
+      <button id="btnReport" class="btn btn-ghost">下载报告</button>
+      <button id="btnSkill" class="btn btn-ghost">下载 SKILL</button>
+      <button id="btnCopy" class="btn btn-ghost">复制概要</button>
+    </div>
+  </section>
+
+  <!-- 设置 -->
+  <section class="card settings" id="settings" hidden>
+    <div class="sec-label">设置</div>
+    <label class="field">
+      <span>DeepSeek API Key（用于「AI 深度诊断」，仅本地保存，不上传）</span>
+      <input id="dsKey" type="password" placeholder="sk-..." spellcheck="false" />
+    </label>
+    <div class="actions">
+      <button id="btnSaveKey" class="btn btn-primary">保存</button>
+      <button id="btnCloseSettings" class="btn btn-ghost">关闭</button>
+    </div>
+    <div class="muted">没有 Key？前往 platform.deepseek.com 获取。也可用「提交收录」把结果交给 GooFuture 官网生成报告。</div>
+  </section>
+
+  <footer class="ft">
+    <a href="https://goofuture.com/company-website-ai-agent/ai-check/" target="_blank" rel="noopener">在线版</a>
+    <span>·</span>
+    <a href="https://github.com/goofuture/ai-website-check-skill" target="_blank" rel="noopener">GitHub</a>
+    <span>·</span>
+    <span class="muted">本地评分，私密安全</span>
+  </footer>
+
+  <script src="extract.js"></script>
+  <script src="engine.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
