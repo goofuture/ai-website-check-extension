@@ -41,11 +41,24 @@
 | 4 | 内容结构化 | 9 | AI 引用友好度 |
 | 5 | FAQ 完整度 | 10 | Agent 友好度 |
 
-## 安装（开发者模式加载）
+## 安装
 
-1. 打开 Chrome → `chrome://extensions` → 右上角开启「开发者模式」。
+**Chrome / Edge（开发者模式加载）**
+
+1. 打开 `chrome://extensions`（Edge 为 `edge://extensions`）→ 右上角开启「开发者模式」。
 2. 点击「加载已解压的扩展程序」，选择本仓库目录（含 `manifest.json` 的目录）。
 3. 固定插件到工具栏，打开任意企业官网，点击图标即可检测。
+
+**Firefox**
+
+1. 打开 `about:debugging#/runtime/this-firefox` → 点「临时加载附加组件…」。
+2. 选择本仓库目录里的 **`manifest.json`**（**不要**选压缩包）。
+3. 临时加载的扩展在 Firefox 重启后失效，重新加载即可。
+
+> ⚠️ Firefox 正式版**强制要求扩展签名**：直接把文件夹压成 zip 当扩展装，会报
+> 「该附加组件无法安装，因为它似乎已损坏」。要永久安装需走
+> [AMO](https://addons.mozilla.org/) 签名，或改用 Developer Edition / Nightly / ESR 并在
+> `about:config` 将 `xpinstall.signatures.required` 设为 `false` 后安装未签名 `.xpi`。
 
 ## 许可证
 
