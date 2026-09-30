@@ -64,6 +64,7 @@
 5. **权限用途说明（重点）**：`optional_host_permissions: <all_urls>` 需在审核问卷中说明用途——
    「用于读取用户指定的域名首页及其 `llms.txt` / `robots.txt` / `sitemap.xml`，以完成本地评分」。
    Edge 对宽泛主机权限审核比 Chrome 更严，**保留为 `optional`（按需申请）可显著降低被拒风险**；切勿改成强制 `host_permissions`。
+   > 逐项权限用途说明的**可直接粘贴文案**见 [`STORE-PERMISSIONS.md`](./STORE-PERMISSIONS.md)（Chrome Web Store 同样适用）。
 6. 上传 1–2 张功能截图与宣传图，提交审核（通常 1–3 个工作日）。
 
 > 打包命令（仓库根目录执行，排除 `.git`）：
