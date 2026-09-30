@@ -1,4 +1,4 @@
-# 网站GEO检测评分 · Chrome 浏览器插件（GooFuture · B-SiteAgent AI）
+# 网站GEO检测评分 · 浏览器插件（Chrome / Edge / Firefox 通用，GooFuture · B-SiteAgent AI）
 
 一键检测**任意企业官网**的「AI 可读性」——也就是这家网站被 **AI 搜索 / AI 问答 / AI 智能体**
 读懂、引用、调用的能力。插件在你本地完成 10 维评分、薄弱项优化建议、报告与 SKILL 生成，
@@ -7,7 +7,18 @@
 > 本插件的评分逻辑是 GooFuture 线上 PHP 检测（`detect.php`）与开源 Python 版（`ai-website-check-skill`）
 > 的**权威移植**，本地分数与官网收录分数口径一致。
 
+> **Microsoft Edge 用户**：本扩展基于 Chromium 内核的 Manifest V3 开发，与 Chrome 共用同一套 API（`chrome.*`），
+> **同一份代码无需任何修改即可在 Edge 上运行**（详见下方「Microsoft Edge 适配说明」）。
+
+> **Mozilla Firefox 用户**：同样基于 Manifest V3，**代码无需改动**即可运行；但 `manifest.json` 已加
+> `browser_specific_settings.gecko.id`——Firefox 要求显式扩展 ID 才能调用 `chrome.scripting`（检测当前页的核心 API）。
+> 开发期在 `about:debugging` → 「临时加载附加组件」加载本目录即可；上架 [Firefox Add-ons (AMO)](https://addons.mozilla.org/) 需 Firefox 109+，
+> 并在审核中对 `<all_urls>` 可选权限说明用途（保持 optional 可降低被拒风险）。
+
 ## 插件效果
+
+> 加载扩展后打开任意企业官网，点击工具栏图标即可检测。  
+  
 ![](images/goofuture-usage.png)  
 
 ## 它能做什么
@@ -35,41 +46,6 @@
 1. 打开 Chrome → `chrome://extensions` → 右上角开启「开发者模式」。
 2. 点击「加载已解压的扩展程序」，选择本仓库目录（含 `manifest.json` 的目录）。
 3. 固定插件到工具栏，打开任意企业官网，点击图标即可检测。
-
-> 发布到 Chrome 应用商店前，请替换 `icons/` 下的图标（当前为程序生成的占位图标）。
-
-## 权限说明
-
-| 权限 | 用途 |
-|---|---|
-| `activeTab` / `scripting` | 检测「当前打开的页面」（注入提取脚本） |
-| `storage` | 本地保存你的 DeepSeek Key |
-| `host_permissions: goofuture.com` | 提交收录（扩展对 Host 权限豁免 CORS，无需改服务端） |
-| `host_permissions: api.deepseek.com` | 调用 DeepSeek 做 AI 诊断 |
-| `optional_host_permissions: <all_urls>` | 仅当你使用「检测指定域名」时按需申请，用于 fetch 该站首页与基建文件 |
-
-> 评分、报告、SKILL **全部在浏览器本地完成**，不上传任何数据；只有你主动点击「提交收录」或「AI 深度诊断」时才会对外请求。
-
-## 目录结构
-
-```
-ai-website-check-extension/
-├── manifest.json      # MV3 清单
-├── popup.html         # 弹窗界面
-├── popup.css          # 样式
-├── popup.js           # 交互逻辑（检测 / 诊断 / 提交 / 下载）
-├── engine.js          # 评分引擎（10 维）+ 报告 / SKILL / Prompt 生成（纯 JS，可单测）
-├── extract.js         # 注入到当前页面的提取函数（DOM + 同源探测 llms/robots/sitemap）
-├── icons/             # 16 / 48 / 128 PNG
-└── README.md
-```
-
-## 与官网 / 开源 Python 版的关系
-
-- 三者评分逻辑完全一致，任一处升级都需要同步另外两处（这是已知约束）。
-- 线上：`goofuture.com/company-website-ai-agent/ai-check/`
-- 开源 Python 版（命令行 / WorkBuddy 技能）：`github.com/goofuture/ai-website-check-skill`
-- 本插件：浏览器内一键检测，离线优先。
 
 ## 许可证
 
