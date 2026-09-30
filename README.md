@@ -7,6 +7,9 @@
 > 本插件的评分逻辑是 GooFuture 线上 PHP 检测（`detect.php`）与开源 Python 版（`ai-website-check-skill`）
 > 的**权威移植**，本地分数与官网收录分数口径一致。
 
+## 插件效果
+![](images/goofuture-usage.png)  
+
 ## 它能做什么
 
 1. **检测当前页面**：打开任意网站，点一下插件图标 → 「检测当前页面」，瞬间拿到 10 维评分。
