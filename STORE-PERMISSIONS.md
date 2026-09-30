@@ -110,6 +110,31 @@ DeepSeek chat completions 接口生成诊断。扩展不内置任何 Key。
 
 ---
 
+## 5. Are you using remote code? —— 必须选 **No**（关键，选错会被拒）
+
+Edge / Chrome 的 MV3 **禁止远程代码**。本扩展**没有**使用任何远程代码，请勾选：
+
+> `○ No, I am not using remote code`  ← 选这个
+
+依据（审核员实测也会得到同样结论）：
+
+- 三个脚本（`engine.js` / `extract.js` / `popup.js`）都以本地 `<script src="...">` 随包分发，
+  无任何外链 `<script>`、无 CDN。
+- 全仓库无 `eval()`、无 `new Function()`、无动态创建 `<script>`、无 `import()` 远程模块。
+- 对 `goofuture.com` / `api.deepseek.com` / 用户输入域名的 `fetch()` **只是读取 JSON / HTML 数据**
+  （API 调用与网页抓取），不是加载或执行外部代码。
+
+**Justification（选 No 后通常无需填写；若仍要求，可写）：**
+
+```
+All JavaScript (engine.js, extract.js, popup.js) is bundled in the package. The extension
+contains no eval, no new Function, no remotely hosted scripts and no remote module imports.
+The fetch() calls only read JSON/HTML data (a submit API and a user-provided LLM API), never
+to load or execute code.
+```
+
+---
+
 ## 审核要点提醒
 
 1. **四项都必填**，且要与扩展实际行为一致（审核员会实测）。
@@ -118,5 +143,4 @@ DeepSeek chat completions 接口生成诊断。扩展不内置任何 Key。
    与上述说明一一对应，无需新增任何权限。
 4. **隐私政策**（Edge 必填字段）需能对应本文：强调「评分 / 报告 / SKILL 均在本地完成，
    仅在用户主动点击『提交收录』或『AI 深度诊断』时才对外请求」。
-5. 若表单出现 **remote code（远程代码）** 相关提问：本扩展**未使用任何远程代码**，
-   所有逻辑（engine.js / extract.js / popup.js）均随包分发，可如实勾选「否」。
+5. **远程代码提问一律选 No**（见上方第 5 节），本扩展不含任何远程代码。
